@@ -387,7 +387,7 @@ export default function DietDashAIDietGenerator() {
                   </div>
                 )}
                 {!isLoading && !result && (
-                  <p className="text-sm text-gray-500">Generate a plan to see JSON with calories, macros, and meals here. After PDF integration, you'll be able to download the ready file.</p>
+                  <p className="text-sm text-gray-500">Generate a plan to see table with calories, macros, and meals here. After PDF integration, you'll be able to download the ready file.</p>
                 )}
                 {!isLoading && result && (
                   <div className="space-y-4">
