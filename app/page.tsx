@@ -437,6 +437,7 @@ export default function DietDashAIDietGenerator() {
                       </table>
                     </div>
 
+
                     {result.notes && (
                       <div className="rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-3 text-sm ring-1 ring-inset ring-green-200 text-gray-700 shadow-sm">
                         <div className="mb-1 font-medium">Notes</div>
