@@ -21,7 +21,22 @@ function NumberField({ label, value, onChange, min = 0, step = 1, placeholder }:
         type="number"
         className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-2 shadow-sm outline-none focus:border-green-500"
         value={value === undefined ? "" : value}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => {
+          const raw = e.target.value;
+          // allow clearing the field → becomes undefined in state
+          if (raw === "") {
+            onChange(undefined as unknown as number);
+            return;
+          }
+        
+          // parse as float (handles 0.1, etc.), ignore NaN
+          const parsed = parseFloat(raw);
+          if (Number.isNaN(parsed)) {
+            onChange(undefined as unknown as number);
+          } else {
+            onChange(parsed);
+          }
+        }}
         min={min}
         step={step}
         placeholder={placeholder}
