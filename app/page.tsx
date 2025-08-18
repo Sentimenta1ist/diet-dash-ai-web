@@ -330,10 +330,17 @@ export default function DietDashAIDietGenerator() {
                 <div className="mt-2 flex items-center justify-between gap-3">
                   <button
                     disabled={!isValid || isLoading}
-                    className="rounded-full bg-gradient-to-r from-green-600 to-green-700 px-5 py-2.5 text-white shadow-lg transition hover:from-green-700 hover:to-green-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-full bg-gradient-to-r from-green-600 to-green-700 px-5 py-2.5 text-white shadow-lg transition hover:from-green-700 hover:to-green-800 disabled:cursor-not-allowed disabled:opacity-50 flex items-center gap-2"
                     type="submit"
                   >
-                    {isLoading ? "Generating…" : "Generate Plan"}
+                    {isLoading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Generating Plan...</span>
+                      </>
+                    ) : (
+                      "Generate Plan"
+                    )}
                   </button>
                   <div className="text-xs text-gray-500">
                     {!isValid && (
@@ -366,10 +373,23 @@ export default function DietDashAIDietGenerator() {
             <div className="rounded-3xl border border-green-100 bg-white/80 backdrop-blur-sm shadow-lg w-full lg:w-1/2">
               <div className="p-4">
                 <h2 className="mb-3 text-lg font-semibold">Result</h2>
-                {!result && (
-                  <p className="text-sm text-gray-500">Generate a plan to see table with calories, macros, and meals here. After PDF integration, you'll be able to download the ready file.</p>
+                {isLoading && (
+                  <div className="flex flex-col items-center justify-center py-8 space-y-4">
+                    <div className="w-12 h-12 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
+                    <p className="text-sm text-gray-600 text-center">
+                      Rina is creating your personalized diet plan...
+                    </p>
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    </div>
+                  </div>
                 )}
-                {result && (
+                {!isLoading && !result && (
+                  <p className="text-sm text-gray-500">Generate a plan to see JSON with calories, macros, and meals here. After PDF integration, you'll be able to download the ready file.</p>
+                )}
+                {!isLoading && result && (
                   <div className="space-y-4">
                     <div className="grid grid-cols-3 gap-3">
                       <div className="rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 p-3 text-sm ring-1 ring-inset ring-green-200 shadow-sm">
